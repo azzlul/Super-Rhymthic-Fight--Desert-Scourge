@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmygufsqqlspk"]
+
+[ext_resource type="Script" uid="uid://bqybt7lycwah7" path="res://player/player.gd" id="1_gf00o"]
+[ext_resource type="Texture2D" uid="uid://cpkwvsqenqicp" path="res://images/player/player_cooldown_mask.png" id="4_c6r0s"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_46utv"]
+radius = 18.0
+
+[node name="Player" type="CharacterBody2D"]
+scale = Vector2(0.3, 0.3)
+collision_mask = 2
+script = ExtResource("1_gf00o")
+invincible = false
+
+[node name="PlayerCooldownMask" type="Sprite2D" parent="."]
+position = Vector2(2.38419e-07, 0)
+rotation = 1.5708
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_c6r0s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_46utv")
+
+[node name="Timer" type="Node" parent="."]
+
+[node name="DashTimer" type="Timer" parent="Timer"]
+wait_time = 3.0
+one_shot = true
+
+[node name="DashLenghTimer" type="Timer" parent="Timer"]
+wait_time = 0.2
+one_shot = true
+
+[node name="DamageTimer" type="Timer" parent="Timer"]
+wait_time = 1.2
+one_shot = true
+
+[node name="SelfHealTimer" type="Timer" parent="Timer"]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="Timer/DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="Timer/DashLenghTimer" to="." method="_on_dash_lengh_timer_timeout"]
+[connection signal="timeout" from="Timer/DamageTimer" to="." method="_on_damage_timer_timeout"]
+[connection signal="timeout" from="Timer/SelfHealTimer" to="." method="_on_self_heal_timer_timeout"]

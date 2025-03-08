@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqwy7avwdst37"]
+
+[ext_resource type="Script" uid="uid://rwj4cq1om152" path="res://player/player_3d.gd" id="1_ckg4u"]
+[ext_resource type="PackedScene" uid="uid://ucg0w05h1pu0" path="res://player/player_model.tscn" id="2_mw2y3"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2a7ft"]
+radius = 0.786044
+
+[node name="Player3D" type="CharacterBody3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+script = ExtResource("1_ckg4u")
+
+[node name="playerModel" parent="." instance=ExtResource("2_mw2y3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_2a7ft")
+
+[node name="Timer" type="Node" parent="."]
+
+[node name="DashTimer" type="Timer" parent="Timer"]
+wait_time = 3.0
+one_shot = true
+
+[node name="DashLenghTimer" type="Timer" parent="Timer"]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="timeout" from="Timer/DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="Timer/DashLenghTimer" to="." method="_on_dash_lengh_timer_timeout"]

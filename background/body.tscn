@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://b421v2ooh6cye"]
+
+[ext_resource type="Script" uid="uid://w7fs7jo2an8o" path="res://background/body.gd" id="1_oninl"]
+[ext_resource type="PackedScene" uid="uid://dxpjds82yuen6" path="res://background/scourge_body_1.tscn" id="2_3un2s"]
+[ext_resource type="PackedScene" uid="uid://fcdskow6y42i" path="res://bullets/boss/body_hit_box_1.tscn" id="2_yipf0"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_2nncm"]
+height = 1.60439
+radius = 0.758763
+
+[node name="Body" type="CharacterBody3D"]
+script = ExtResource("1_oninl")
+
+[node name="BodyHitBox1" parent="." instance=ExtResource("2_yipf0")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_2nncm")
+disabled = true
+
+[node name="Model" parent="." instance=ExtResource("2_3un2s")]

@@ -1,0 +1,22 @@
+[gd_scene load_steps=7 format=3 uid="uid://nhx7dj1c2nfb"]
+
+[ext_resource type="PackedScene" uid="uid://cis6njj4ff8h4" path="res://blender projects/ground/ground4.blend" id="1_3luof"]
+[ext_resource type="Script" uid="uid://biw30a0tk7643" path="res://background/grounds/ground_1.gd" id="2_4dx46"]
+[ext_resource type="Material" uid="uid://cgfvupklod1ju" path="res://blender projects/ground/textures/ground1/Top.tres" id="3_j1ot2"]
+[ext_resource type="Material" uid="uid://b6ejprgavemhh" path="res://blender projects/ground/textures/ground1/Body.tres" id="4_vmu6x"]
+[ext_resource type="Material" uid="uid://p4pymnf3douu" path="res://blender projects/ground/textures/ground1/Spikes.tres" id="5_6ejw7"]
+[ext_resource type="Material" uid="uid://ca8lggyiplt04" path="res://blender projects/ground/textures/ground1/Samd.tres" id="6_fbpn6"]
+
+[node name="ground4" groups=["Ground"] instance=ExtResource("1_3luof")]
+script = ExtResource("2_4dx46")
+
+[node name="ground" parent="." index="0"]
+surface_material_override/0 = ExtResource("3_j1ot2")
+surface_material_override/1 = ExtResource("4_vmu6x")
+surface_material_override/2 = ExtResource("5_6ejw7")
+surface_material_override/3 = ExtResource("6_fbpn6")
+
+[node name="DeleteTimer" type="Timer" parent="." index="1"]
+wait_time = 5.0
+
+[connection signal="timeout" from="DeleteTimer" to="." method="_on_delete_timer_timeout"]

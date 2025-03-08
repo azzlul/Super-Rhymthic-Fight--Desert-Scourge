@@ -1,0 +1,14 @@
+[gd_scene load_steps=5 format=3 uid="uid://ucg0w05h1pu0"]
+
+[ext_resource type="PackedScene" uid="uid://cihl484tkn05i" path="res://blender projects/player/player.blend" id="1_1gp7y"]
+[ext_resource type="Script" uid="uid://by1ouamxx6lo2" path="res://player/player_model.gd" id="2_qhd6e"]
+[ext_resource type="Material" uid="uid://ciai4takew1q" path="res://blender projects/player/Material.002.tres" id="3_huxa7"]
+[ext_resource type="Material" uid="uid://xx2sy82j0dc1" path="res://blender projects/player/Material.001.tres" id="4_wvh14"]
+
+[node name="playerModel" instance=ExtResource("1_1gp7y")]
+script = ExtResource("2_qhd6e")
+
+[node name="Sphere" parent="." index="0"]
+layers = 2
+surface_material_override/0 = ExtResource("3_huxa7")
+surface_material_override/1 = ExtResource("4_wvh14")

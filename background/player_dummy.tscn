@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqiimb3bhfijo"]
+
+[ext_resource type="Script" uid="uid://uug4oond2ryv" path="res://background/PlayerDummy.gd" id="1_3i0w7"]
+[ext_resource type="Texture2D" uid="uid://dei2gtyte2den" path="res://images/ui/icon.svg" id="2_af7sd"]
+
+[node name="PlayerDummy" type="CharacterBody3D"]
+script = ExtResource("1_3i0w7")
+
+[node name="Timer" type="Node" parent="."]
+
+[node name="DashTimer" type="Timer" parent="Timer"]
+wait_time = 3.0
+one_shot = true
+
+[node name="DashLenghTimer" type="Timer" parent="Timer"]
+wait_time = 0.2
+one_shot = true
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(-6.55671e-07, 0, 15, 0, 15, 0, -15, 0, -6.55671e-07, -13.0319, 0, 0)
+visible = false
+layers = 2
+texture = ExtResource("2_af7sd")
+
+[connection signal="timeout" from="Timer/DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="Timer/DashLenghTimer" to="." method="_on_dash_lengh_timer_timeout"]

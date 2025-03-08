@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxkooch4wq0rl"]
+
+[ext_resource type="Script" uid="uid://w7fs7jo2an8o" path="res://background/body.gd" id="1_ciogt"]
+[ext_resource type="PackedScene" uid="uid://d4n2dhwppn7ut" path="res://background/scourge_tail.tscn" id="2_h8xp4"]
+[ext_resource type="PackedScene" uid="uid://cvsn3eqybrytf" path="res://bullets/boss/tail_hit_box.tscn" id="2_rs084"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_2nncm"]
+height = 1.60439
+radius = 0.758763
+
+[node name="Tail" type="CharacterBody3D"]
+script = ExtResource("1_ciogt")
+
+[node name="BodyHitBox1" parent="." instance=ExtResource("2_rs084")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_2nncm")
+disabled = true
+
+[node name="Model" parent="." instance=ExtResource("2_h8xp4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.7652)

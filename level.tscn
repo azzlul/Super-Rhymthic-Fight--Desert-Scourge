@@ -1,0 +1,486 @@
+[gd_scene load_steps=27 format=3 uid="uid://bvatnm7o4phng"]
+
+[ext_resource type="Script" uid="uid://bdxjgqk8pxjqx" path="res://levels/level.gd" id="1_iybre"]
+[ext_resource type="PackedScene" uid="uid://cmygufsqqlspk" path="res://player/player.tscn" id="1_pwf1i"]
+[ext_resource type="Material" uid="uid://cgvl1lw5d54lu" path="res://shaders/sky_shader.tres" id="3_8cye3"]
+[ext_resource type="Script" uid="uid://7q1nnexpgll1" path="res://levels/Camera3D.gd" id="3_l3e54"]
+[ext_resource type="PackedScene" uid="uid://cwwbhiedio45d" path="res://bullets/circular_bullet_spawner.tscn" id="4_dnoix"]
+[ext_resource type="PackedScene" uid="uid://cqiimb3bhfijo" path="res://background/player_dummy.tscn" id="6_f3wdo"]
+[ext_resource type="FontFile" uid="uid://n3j6orvlkn48" path="res://font/editundo.ttf" id="15_l4yn0"]
+[ext_resource type="Texture2D" uid="uid://syi6hfc84kil" path="res://images/ui/title.png" id="16_dksbs"]
+[ext_resource type="Texture2D" uid="uid://biqfs0v3j5qvv" path="res://images/ui/MusicNote.png" id="16_jtg5h"]
+[ext_resource type="Texture2D" uid="uid://dareathyr0erf" path="res://images/ui/pause_overay.png" id="18_aifma"]
+
+[sub_resource type="Sky" id="Sky_2orkt"]
+sky_material = ExtResource("3_8cye3")
+
+[sub_resource type="Environment" id="Environment_1ffuk"]
+background_mode = 2
+sky = SubResource("Sky_2orkt")
+sdfgi_use_occlusion = true
+
+[sub_resource type="Animation" id="Animation_5bvmk"]
+resource_name = "Level"
+length = 255.0
+step = 1.0
+
+[sub_resource type="Animation" id="Animation_fuhn3"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0l5wk"]
+_data = {
+&"Level": SubResource("Animation_5bvmk"),
+&"RESET": SubResource("Animation_fuhn3")
+}
+
+[sub_resource type="Theme" id="Theme_v6wvo"]
+default_font = ExtResource("15_l4yn0")
+default_font_size = 150
+
+[sub_resource type="Theme" id="Theme_2njlr"]
+default_font = ExtResource("15_l4yn0")
+default_font_size = 50
+
+[sub_resource type="Animation" id="Animation_opptp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_u5j6r"]
+resource_name = "fade_in"
+length = 2.0
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e62uk"]
+_data = {
+&"RESET": SubResource("Animation_opptp"),
+&"fade_in": SubResource("Animation_u5j6r")
+}
+
+[sub_resource type="Theme" id="Theme_gn5p7"]
+default_font = ExtResource("15_l4yn0")
+default_font_size = 40
+
+[sub_resource type="Theme" id="Theme_wo1rw"]
+default_font = ExtResource("15_l4yn0")
+default_font_size = 25
+
+[sub_resource type="Theme" id="Theme_t5xbk"]
+default_font = ExtResource("15_l4yn0")
+default_font_size = 50
+
+[sub_resource type="Theme" id="Theme_3uuhd"]
+default_font = ExtResource("15_l4yn0")
+default_font_size = 200
+
+[sub_resource type="Theme" id="Theme_ar7mq"]
+default_font = ExtResource("15_l4yn0")
+default_font_size = 100
+
+[sub_resource type="Theme" id="Theme_p2k71"]
+default_font = ExtResource("15_l4yn0")
+default_font_size = 50
+
+[node name="level" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_iybre")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+process_mode = 1
+offset_right = 1920.0
+offset_bottom = 1080.0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+canvas_cull_mask = 4294967293
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 115.707, 0, 0)
+cull_mask = 1048573
+current = true
+far = 1017.25
+script = ExtResource("3_l3e54")
+shakeStrength = 2.0
+fade = 1.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
+environment = SubResource("Environment_1ffuk")
+
+[node name="PlayerDummy" parent="SubViewportContainer/SubViewport" instance=ExtResource("6_f3wdo")]
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="."]
+process_mode = 1
+offset_right = 1920.0
+offset_bottom = 1080.0
+stretch = true
+
+[node name="SubViewport2" type="SubViewport" parent="SubViewportContainer2"]
+transparent_bg = true
+handle_input_locally = false
+canvas_cull_mask = 4293918722
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer2/SubViewport2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+cull_mask = 2
+projection = 1
+current = true
+fov = 60.0
+size = 320.0
+far = 1000.0
+script = ExtResource("3_l3e54")
+shakeStrength = 2.0
+fade = 1.0
+
+[node name="SpotLight3D" type="SpotLight3D" parent="SubViewportContainer2/SubViewport2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 317.834, 0, 0)
+layers = 2
+light_energy = 200.0
+light_size = 1.0
+light_cull_mask = 4294966274
+spot_range = 1203.86
+spot_angle = 36.5625
+
+[node name="Bullets" type="Node2D" parent="."]
+
+[node name="Tst" parent="Bullets" instance=ExtResource("4_dnoix")]
+position = Vector2(684, 513)
+bullet_path = "res://bullets/bullet.tscn"
+look_at_player = true
+auto_fire = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+process_mode = 1
+libraries = {
+&"": SubResource("AnimationLibrary_0l5wk")
+}
+
+[node name="UI_Above_Player" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WarningText" type="Control" parent="UI_Above_Player"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 195.0
+offset_right = 3.0
+offset_bottom = 195.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="RichTextLabel" parent="UI_Above_Player/WarningText"]
+layout_mode = 0
+offset_left = -11.0
+offset_top = -28.0
+offset_right = 1901.0
+offset_bottom = 143.0
+theme = SubResource("Theme_v6wvo")
+text = "         WARNING!"
+
+[node name="TextEdit" type="RichTextLabel" parent="UI_Above_Player/WarningText"]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 217.0
+offset_right = 1707.0
+offset_bottom = 747.0
+theme = SubResource("Theme_2njlr")
+text = "	This game contains flashing lights, and may not be suitable for those who suffer from photosensitive epilepsy.
+
+
+
+	             Press enter to continue"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI_Above_Player/WarningText"]
+libraries = {
+&"": SubResource("AnimationLibrary_e62uk")
+}
+autoplay = "fade_in"
+
+[node name="main menu" type="Control" parent="UI_Above_Player"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="instructions" type="RichTextLabel" parent="UI_Above_Player/main menu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 48.125
+anchor_bottom = 27.3
+offset_left = -102.0
+offset_top = 628.0
+offset_right = -110.0
+offset_bottom = 409.0
+theme = SubResource("Theme_gn5p7")
+text = "		*WASD/arrow keys to move
+		*Shift to slow down movement
+		*Space to dash. You are invulnerable while dashing. The dash has a cooldown
+		*You have 6 HP, and you regenerate any lost health
+		*While playing, esc/p to pause
+		*The blue circle is your hitbox
+		*Settings are in the bottom-right		
+		*Press enter to begin
+		*Have fun!"
+
+[node name="TextureRect" type="TextureRect" parent="UI_Above_Player/main menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 373.0
+offset_top = -65.0
+offset_right = 1573.0
+offset_bottom = 635.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.950215, 0.950215)
+texture = ExtResource("16_dksbs")
+
+[node name="CheckButton" type="CheckBox" parent="UI_Above_Player/main menu"]
+layout_mode = 0
+offset_left = 1697.0
+offset_top = 994.0
+offset_right = 1880.0
+offset_bottom = 1047.0
+theme = SubResource("Theme_wo1rw")
+text = "Infinite lives"
+
+[node name="quit_button" type="Button" parent="UI_Above_Player/main menu"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 996.0
+offset_right = 182.0
+offset_bottom = 1049.0
+theme = SubResource("Theme_t5xbk")
+text = "QUIT"
+
+[node name="Player" parent="." instance=ExtResource("1_pwf1i")]
+process_mode = 1
+visible = false
+position = Vector2(960, 540)
+
+[node name="UI_Below_Player" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="pause menu" type="Control" parent="UI_Below_Player"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PauseOveray" type="Sprite2D" parent="UI_Below_Player/pause menu"]
+position = Vector2(960, 540)
+texture = ExtResource("18_aifma")
+
+[node name="TextEdit" type="RichTextLabel" parent="UI_Below_Player/pause menu"]
+layout_mode = 0
+offset_left = 565.0
+offset_top = 155.0
+offset_right = 1406.0
+offset_bottom = 342.0
+theme = SubResource("Theme_3uuhd")
+text = " PAUSED"
+
+[node name="Retry Button" type="Button" parent="UI_Below_Player/pause menu"]
+layout_mode = 0
+offset_left = 657.0
+offset_top = 432.0
+offset_right = 1259.0
+offset_bottom = 600.0
+theme = SubResource("Theme_ar7mq")
+text = "RETRY"
+
+[node name="Main Menu Button" type="Button" parent="UI_Below_Player/pause menu"]
+layout_mode = 0
+offset_left = 657.0
+offset_top = 640.0
+offset_right = 1259.0
+offset_bottom = 808.0
+theme = SubResource("Theme_ar7mq")
+text = "MAIN MENU"
+
+[node name="Game Over Screen" type="Control" parent="UI_Below_Player"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PauseOveray" type="Sprite2D" parent="UI_Below_Player/Game Over Screen"]
+position = Vector2(960, 540)
+texture = ExtResource("18_aifma")
+
+[node name="TextEdit" type="RichTextLabel" parent="UI_Below_Player/Game Over Screen"]
+layout_mode = 0
+offset_left = 482.0
+offset_top = 165.0
+offset_right = 1504.0
+offset_bottom = 352.0
+theme = SubResource("Theme_3uuhd")
+text = "GAME OVER"
+
+[node name="Retry Button" type="Button" parent="UI_Below_Player/Game Over Screen"]
+layout_mode = 0
+offset_left = 657.0
+offset_top = 432.0
+offset_right = 1259.0
+offset_bottom = 600.0
+theme = SubResource("Theme_ar7mq")
+text = "RETRY"
+
+[node name="Main Menu Button" type="Button" parent="UI_Below_Player/Game Over Screen"]
+layout_mode = 0
+offset_left = 657.0
+offset_top = 640.0
+offset_right = 1259.0
+offset_bottom = 808.0
+theme = SubResource("Theme_ar7mq")
+text = "MAIN MENU"
+
+[node name="ending screen" type="Control" parent="UI_Below_Player"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Title" type="Sprite2D" parent="UI_Below_Player/ending screen"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(971, 198)
+scale = Vector2(0.757143, 0.757143)
+texture = ExtResource("16_dksbs")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI_Below_Player/ending screen"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 727.0
+offset_top = 401.0
+offset_right = 1655.0
+offset_bottom = 503.0
+theme = SubResource("Theme_p2k71")
+text = "CREATED BY AZZLUL"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="UI_Below_Player/ending screen"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 715.0
+offset_top = 448.0
+offset_right = 1227.0
+offset_bottom = 502.0
+theme = SubResource("Theme_p2k71")
+text = "THANKS FOR PLAYING!"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="UI_Below_Player/ending screen"]
+visible = false
+layout_mode = 0
+offset_left = 700.0
+offset_top = 503.0
+offset_right = 1212.0
+offset_bottom = 557.0
+theme = SubResource("Theme_p2k71")
+
+[node name="Retry Button" type="Button" parent="UI_Below_Player/ending screen"]
+visible = false
+layout_mode = 0
+offset_left = 649.0
+offset_top = 560.0
+offset_right = 1251.0
+offset_bottom = 728.0
+theme = SubResource("Theme_ar7mq")
+text = "RETRY"
+
+[node name="Main Menu Button" type="Button" parent="UI_Below_Player/ending screen"]
+visible = false
+layout_mode = 0
+offset_left = 649.0
+offset_top = 768.0
+offset_right = 1251.0
+offset_bottom = 936.0
+theme = SubResource("Theme_ar7mq")
+text = "MAIN MENU"
+
+[node name="HSlider" type="HSlider" parent="UI_Below_Player"]
+visible = false
+layout_mode = 0
+offset_left = 1556.0
+offset_top = 928.0
+offset_right = 1894.0
+offset_bottom = 996.0
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="MusicNote" type="Sprite2D" parent="UI_Below_Player/HSlider"]
+position = Vector2(-20, 32)
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("16_jtg5h")
+
+[node name="health_bar" type="Control" parent="UI_Below_Player"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="hp" type="RichTextLabel" parent="UI_Below_Player/health_bar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 48.125
+anchor_bottom = 27.3
+offset_left = 7.0
+offset_top = 1039.0
+offset_right = -1710.0
+offset_bottom = 43.0
+theme = SubResource("Theme_gn5p7")
+text = "HP:6/6"
+
+[connection signal="toggled" from="UI_Above_Player/main menu/CheckButton" to="." method="_on_check_button_toggled"]
+[connection signal="pressed" from="UI_Above_Player/main menu/quit_button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="UI_Below_Player/pause menu/Retry Button" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="UI_Below_Player/pause menu/Main Menu Button" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="UI_Below_Player/Game Over Screen/Retry Button" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="UI_Below_Player/Game Over Screen/Main Menu Button" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="UI_Below_Player/ending screen/Retry Button" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="UI_Below_Player/ending screen/Main Menu Button" to="." method="_on_main_menu_button_pressed"]
+[connection signal="value_changed" from="UI_Below_Player/HSlider" to="." method="_on_h_slider_value_changed"]

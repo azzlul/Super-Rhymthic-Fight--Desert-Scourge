@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://sddk7hmkkhyc"]
+
+[ext_resource type="Script" uid="uid://bto3gojrespkb" path="res://background/minion/minion.gd" id="1_g1eh0"]
+[ext_resource type="PackedScene" uid="uid://dretv6nnjd0ol" path="res://background/minion/minion_head.tscn" id="2_as4nm"]
+[ext_resource type="PackedScene" uid="uid://dfnaox4ucqddy" path="res://background/minion/minion_body.tscn" id="3_0faa1"]
+[ext_resource type="PackedScene" uid="uid://qhqqylvq1yvf" path="res://background/minion/minion_tail.tscn" id="4_40bhr"]
+
+[node name="minion" type="Node3D"]
+script = ExtResource("1_g1eh0")
+
+[node name="minion_head" parent="." instance=ExtResource("2_as4nm")]
+
+[node name="minion_body" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_0faa1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+target = NodePath("../minion_head")
+
+[node name="minion_body2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_0faa1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16)
+target = NodePath("../minion_body")
+
+[node name="minion_tail" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_40bhr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 24)
+target = NodePath("../minion_body2")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

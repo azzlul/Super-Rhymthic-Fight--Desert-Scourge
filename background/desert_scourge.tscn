@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://wfshsxlxtdtr"]
+
+[ext_resource type="Script" uid="uid://7px7igjpqvpg" path="res://background/desert_scourge.gd" id="1_6d7gs"]
+
+[node name="DesertScourge" type="Node3D"]
+script = ExtResource("1_6d7gs")
+
+[node name="addPozTimer" type="Timer" parent="."]
+wait_time = 0.6
+
+[node name="testTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="addPozTimer" to="." method="_on_add_poz_timer_timeout"]
+[connection signal="timeout" from="testTimer" to="." method="_on_test_timer_timeout"]

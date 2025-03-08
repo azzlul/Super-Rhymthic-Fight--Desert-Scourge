@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://dabulq7rlmder"]
+
+[ext_resource type="PackedScene" uid="uid://bgnmha3ftsvjh" path="res://blender projects/scourge models/minion_tail.blend" id="1_8gkvl"]
+
+[node name="minion_tail_model" instance=ExtResource("1_8gkvl")]
+
+[node name="Cylinder" parent="." index="0"]
+layers = 2
+
+[node name="Cube_001" parent="." index="2"]
+layers = 2
+
+[node name="Cube" parent="." index="3"]
+layers = 2

@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwwbhiedio45d"]
+
+[ext_resource type="Script" uid="uid://313yycbtln5j" path="res://bullets/circular_bullet_spawner.gd" id="1_6bjh4"]
+
+[node name="BulletSpawner" type="Node2D"]
+script = ExtResource("1_6bjh4")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="OffsetTimer" type="Timer" parent="."]
+wait_time = 0.001
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="OffsetTimer" to="." method="_on_offset_timer_timeout"]

@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dn4yqxpwk2awf"]
+
+[ext_resource type="Texture2D" uid="uid://c003xaxcy02v3" path="res://images/bullets/swirly bullet.png" id="1_867ip"]
+[ext_resource type="Script" uid="uid://box5lminugxc0" path="res://bullets/swirly_bullet.gd" id="1_sv2lf"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ra5i1"]
+radius = 11.0
+height = 76.0
+
+[node name="Area2D" type="Area2D" groups=["Bullet"]]
+scale = Vector2(0.2, 0.2)
+collision_layer = 2
+script = ExtResource("1_sv2lf")
+
+[node name="SwirlyBullet" type="Sprite2D" parent="."]
+texture = ExtResource("1_867ip")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ra5i1")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(5, 2)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvsn3eqybrytf"]
+
+[ext_resource type="Script" uid="uid://cblvhns6paqw1" path="res://levels/head_hit_box.gd" id="1_mwxko"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f1d1h"]
+size = Vector2(82, 162)
+
+[node name="TailHitBox" type="Area2D"]
+collision_layer = 2
+script = ExtResource("1_mwxko")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-39, 0)
+shape = SubResource("RectangleShape2D_f1d1h")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

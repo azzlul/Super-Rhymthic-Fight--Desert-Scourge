@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhxeu1lcoihdp"]
+
+[ext_resource type="Script" uid="uid://5fadng0a2t4j" path="res://bullets/vertical_bullet_spawner.gd" id="1_3lin5"]
+
+[node name="VerticalBulletSpawner" type="Node2D"]
+script = ExtResource("1_3lin5")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

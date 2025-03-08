@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://dfnaox4ucqddy"]
+
+[ext_resource type="Script" uid="uid://bwcq2sggij1r7" path="res://background/minion/minion_body.gd" id="1_m0mto"]
+[ext_resource type="PackedScene" uid="uid://bjj6rf5b15l66" path="res://background/minion/minion_body_model.tscn" id="2_w0s6j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qvgns"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1r16n"]
+
+[node name="minion_body" type="CharacterBody3D"]
+script = ExtResource("1_m0mto")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_qvgns")
+
+[node name="minion_body_model" parent="." instance=ExtResource("2_w0s6j")]
+transform = Transform3D(-5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_1r16n")
+disabled = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

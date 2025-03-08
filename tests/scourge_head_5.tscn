@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cy33tslym2kkr"]
+
+[ext_resource type="PackedScene" uid="uid://bf6pqniqqr7rw" path="res://blender projects/scourge models/scourge_head5.blend" id="1_j531x"]
+
+[node name="scourge_head5" instance=ExtResource("1_j531x")]
