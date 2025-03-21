@@ -1,3 +1,9 @@
 h - activate boss
 y - activate sandstorm
 z - activate minions
+x - activate bullets
+i - boss patrol inner
+o - boss patrol outer
+f - boss follow player
+m - boss dash
+n - boss long dash
