@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://vubvil2tip1b"]
+
+[ext_resource type="Script" uid="uid://bp6i0cd1qqix2" path="res://background/grounds/background_dust.gd" id="1_tb0p0"]
+[ext_resource type="Shader" uid="uid://cdwusge14m35b" path="res://shaders/background_dust.gdshader" id="1_vrcuq"]
+[ext_resource type="Texture2D" uid="uid://cy2awbmug4pw2" path="res://images/background/dust_1.001.png" id="2_odn6n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ij3ea"]
+shader = ExtResource("1_vrcuq")
+shader_parameter/dust = ExtResource("2_odn6n")
+shader_parameter/direction = Vector2(-0.83, -0.19)
+shader_parameter/speed = 50.0
+shader_parameter/alpha = 0.6
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_fdalx"]
+
+[node name="background_dust" type="Node2D"]
+script = ExtResource("1_tb0p0")
+
+[node name="Dust1_001" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ij3ea")
+scale = Vector2(100, 100)
+texture = SubResource("CanvasTexture_fdalx")

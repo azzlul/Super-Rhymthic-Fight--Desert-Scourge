@@ -178,6 +178,9 @@ func change_overlay_alpha(val):
 func change_speed(val):
 	$GroundSpawner.speed = val
 
+func change_dust_alpha(val):
+	$Viewports/background_dust.change_alpha(val)
+
 func change_level_state_2():
 	var tween = create_tween()
 	tween.set_parallel(true)
@@ -187,6 +190,8 @@ func change_level_state_2():
 	tween.tween_method(change_exposure, 1.0, exposure, transition_time)
 	tween.tween_method(change_overlay_alpha, 0.0, 1.0, transition_time)
 	tween.tween_method(change_cloud_alpha, 1.0, 0.0, transition_time)
+	tween.tween_method(change_dust_alpha, 0.0, 0.8, transition_time)
+	$UI/foreground_dust.emitting = true
 	#change_sky_colors_1(sky_storm_color_1)
 	#change_sky_colors_2(sky_storm_color_2)
 	#change_exposure(exposure)

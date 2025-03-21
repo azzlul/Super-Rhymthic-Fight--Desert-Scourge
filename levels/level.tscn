@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://xi8ttmjw2lnq"]
+[gd_scene load_steps=34 format=3 uid="uid://xi8ttmjw2lnq"]
 
 [ext_resource type="Script" uid="uid://bdxjgqk8pxjqx" path="res://levels/level.gd" id="1_iybre"]
 [ext_resource type="Material" uid="uid://cgvl1lw5d54lu" path="res://shaders/sky_shader.tres" id="3_87pc6"]
@@ -9,11 +9,13 @@
 [ext_resource type="PackedScene" uid="uid://cwwbhiedio45d" path="res://bullets/circular_bullet_spawner.tscn" id="5_gdobn"]
 [ext_resource type="PackedScene" uid="uid://wfshsxlxtdtr" path="res://background/desert_scourge.tscn" id="8_3gq8p"]
 [ext_resource type="Texture2D" uid="uid://cncup320fqyak" path="res://images/background/storm_overlay.png" id="9_pa4h4"]
+[ext_resource type="PackedScene" uid="uid://vubvil2tip1b" path="res://background/grounds/background_dust.tscn" id="9_ta7ci"]
 [ext_resource type="Script" uid="uid://djvfmjfcjcb6p" path="res://levels/ground_spawner.gd" id="10_72m2t"]
 [ext_resource type="PackedScene" uid="uid://buxjqbs66o43b" path="res://player/health_bar.tscn" id="12_3x685"]
 [ext_resource type="FontFile" uid="uid://n3j6orvlkn48" path="res://font/editundo.ttf" id="15_l4yn0"]
 [ext_resource type="Texture2D" uid="uid://syi6hfc84kil" path="res://images/ui/title.png" id="16_dksbs"]
 [ext_resource type="Texture2D" uid="uid://biqfs0v3j5qvv" path="res://images/ui/MusicNote.png" id="16_jtg5h"]
+[ext_resource type="Texture2D" uid="uid://eokrh6jokh5h" path="res://images/background/dust_particle.png" id="16_lh335"]
 [ext_resource type="Texture2D" uid="uid://dareathyr0erf" path="res://images/ui/pause_overay.png" id="18_aifma"]
 
 [sub_resource type="Sky" id="Sky_lon1b"]
@@ -127,7 +129,7 @@ metadata/_edit_lock_ = true
 
 [node name="LightSun" type="DirectionalLight3D" parent="Suns"]
 transform = Transform3D(0.418943, -0.741325, 0.524331, -0.274792, 0.446861, 0.851354, -0.865434, -0.500751, -0.0165009, 0, 0, 0)
-layers = 3
+layers = 7
 light_bake_mode = 1
 directional_shadow_mode = 0
 
@@ -146,6 +148,7 @@ process_mode = 1
 offset_right = 1920.0
 offset_bottom = 1080.0
 stretch = true
+metadata/_edit_lock_ = true
 
 [node name="SubViewport" type="SubViewport" parent="Viewports/SubViewportContainer"]
 handle_input_locally = false
@@ -155,7 +158,7 @@ render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="Viewports/SubViewportContainer/SubViewport"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 115.707, 0, 0)
-cull_mask = 1048573
+cull_mask = 1
 current = true
 far = 1017.25
 script = ExtResource("3_l3e54")
@@ -176,6 +179,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60, 0, 327.743)
 activated = false
 
 [node name="GameElements" type="Node2D" parent="Viewports/SubViewportContainer/SubViewport"]
+metadata/_edit_lock_ = true
 
 [node name="Bullets" type="Node2D" parent="Viewports/SubViewportContainer/SubViewport/GameElements"]
 
@@ -305,6 +309,33 @@ bullet_path = "res://background/bullet/teeth.tscn"
 bullet_type = "bullet"
 bullet_dimension = "3D"
 
+[node name="background_dust" parent="Viewports" instance=ExtResource("9_ta7ci")]
+position = Vector2(960, 959.955)
+scale = Vector2(19.199, 19.199)
+
+[node name="SubViewportContainer3" type="SubViewportContainer" parent="Viewports"]
+process_mode = 1
+offset_right = 1920.0
+offset_bottom = 1080.0
+stretch = true
+metadata/_edit_lock_ = true
+
+[node name="SubViewport2" type="SubViewport" parent="Viewports/SubViewportContainer3"]
+transparent_bg = true
+handle_input_locally = false
+canvas_cull_mask = 4293918722
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="Viewports/SubViewportContainer3/SubViewport2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 115.707, 0, 0)
+cull_mask = 4
+current = true
+far = 1017.25
+script = ExtResource("3_l3e54")
+shakeStrength = 2.0
+fade = 1.0
+
 [node name="SubViewportContainer2" type="SubViewportContainer" parent="Viewports"]
 process_mode = 1
 offset_right = 1920.0
@@ -315,13 +346,13 @@ metadata/_edit_lock_ = true
 [node name="SubViewport2" type="SubViewport" parent="Viewports/SubViewportContainer2"]
 transparent_bg = true
 handle_input_locally = false
-canvas_cull_mask = 4293918726
+canvas_cull_mask = 4293918722
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="Viewports/SubViewportContainer2/SubViewport2"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
-cull_mask = 6
+cull_mask = 2
 projection = 1
 current = true
 fov = 60.0
@@ -336,6 +367,7 @@ modulate = Color(1, 1, 1, 0)
 top_level = true
 position = Vector2(960, 540)
 texture = ExtResource("9_pa4h4")
+metadata/_edit_lock_ = true
 
 [node name="UI" type="Node" parent="."]
 
@@ -632,6 +664,25 @@ metadata/_edit_lock_ = true
 
 [node name="health_bar" parent="UI" instance=ExtResource("12_3x685")]
 position = Vector2(112, 969)
+
+[node name="foreground_dust" type="CPUParticles2D" parent="UI"]
+position = Vector2(0, 540)
+emitting = false
+amount = 500
+texture = ExtResource("16_lh335")
+lifetime = 50.0
+speed_scale = 10.0
+emission_shape = 3
+emission_rect_extents = Vector2(1, 800)
+direction = Vector2(1, 0.2)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 100.0
+linear_accel_min = 1.0
+linear_accel_max = 10.0
+scale_amount_min = 0.1
+color = Color(1, 1, 1, 0.32549)
 
 [node name="AudioAnimation" type="Node" parent="."]
 

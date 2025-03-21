@@ -11,6 +11,7 @@
 script = ExtResource("2_fdn0u")
 
 [node name="ground" parent="." index="0"]
+layers = 4
 surface_material_override/0 = ExtResource("3_hdimb")
 surface_material_override/1 = ExtResource("4_6r4on")
 surface_material_override/2 = ExtResource("5_5ntij")
